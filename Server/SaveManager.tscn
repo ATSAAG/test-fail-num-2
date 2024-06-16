@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0d1ya707lru6"]
+
+[ext_resource type="Script" path="res://Server/SaveManager.cs" id="1_xtmro"]
+[ext_resource type="PackedScene" uid="uid://bap2vuuql0r5c" path="res://loading_screen.tscn" id="2_avm3f"]
+
+[node name="Sauvegarde" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xtmro")
+
+[node name="Go_back" type="Button" parent="."]
+layout_mode = 0
+offset_right = 151.0
+offset_bottom = 60.0
+text = "Retour"
+
+[node name="Load Level" type="Button" parent="."]
+layout_mode = 0
+offset_left = 934.0
+offset_top = 16.0
+offset_right = 1123.0
+offset_bottom = 68.0
+text = "Lancer la partie"
+
+[node name="LoadingScreen" parent="." instance=ExtResource("2_avm3f")]
+visible = false
+layout_mode = 1
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 143.0
+offset_right = 795.0
+offset_bottom = 262.0
+text = "Continuer la partie."
+
+[node name="New" type="Button" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 361.0
+offset_right = 795.0
+offset_bottom = 480.0
+text = "Nouvelle partie."
+
+[connection signal="button_down" from="Go_back" to="." method="_on_go_back_button_down"]
+[connection signal="button_down" from="Load Level" to="." method="_on_load_level_button_down"]
+[connection signal="button_down" from="Continue" to="." method="_on_continue_button_down"]
+[connection signal="button_down" from="New" to="." method="_on_new_button_down"]

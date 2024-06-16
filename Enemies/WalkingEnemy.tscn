@@ -1,0 +1,153 @@
+[gd_scene load_steps=17 format=3 uid="uid://c0548juqjjm81"]
+
+[ext_resource type="Texture2D" uid="uid://4siuae8sd77w" path="res://Assets usefull/Main Characters/Mask Dude/Run (32x32).png" id="1_h3o8e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8lml"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6o3i"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cdu0"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvi1h"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j8x7"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhj3b"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s5na"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcxr7"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eseav"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_envk6"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s3ay"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnqdm"]
+atlas = ExtResource("1_h3o8e")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hq68p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8lml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6o3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cdu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvi1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j8x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhj3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0s5na")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcxr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eseav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_envk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s3ay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnqdm")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxgyu"]
+size = Vector2(14.2666, 22.9144)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dw1o"]
+properties/0/path = NodePath(".:visibility_layer")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="WalkingEnemy" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hq68p")
+animation = &"Run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 4.5)
+shape = SubResource("RectangleShape2D_mxgyu")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(6, -4)
+target_position = Vector2(6, 0)
+
+[node name="RayCast2D7" type="RayCast2D" parent="."]
+position = Vector2(-6, 16)
+target_position = Vector2(0, 6)
+hit_from_inside = true
+
+[node name="RayCast2D8" type="RayCast2D" parent="."]
+position = Vector2(8, 16)
+target_position = Vector2(0, 6)
+hit_from_inside = true
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+position = Vector2(-4, -4)
+rotation = 3.14159
+target_position = Vector2(6, 0)
+
+[node name="RayCast2D5" type="RayCast2D" parent="."]
+position = Vector2(-4, 2)
+rotation = 3.14159
+target_position = Vector2(6, 0)
+
+[node name="RayCast2D6" type="RayCast2D" parent="."]
+position = Vector2(-4, 8)
+rotation = 3.14159
+target_position = Vector2(6, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(6, 2)
+target_position = Vector2(6, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2(6, 8)
+target_position = Vector2(6, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4dw1o")

@@ -1,0 +1,117 @@
+[gd_scene load_steps=16 format=3 uid="uid://dilkfbldiuood"]
+
+[ext_resource type="Script" path="res://Server/SceneManager.cs" id="1_7oqaf"]
+[ext_resource type="PackedScene" uid="uid://x6mfh4sbat8u" path="res://tile_map.tscn" id="2_hanmc"]
+[ext_resource type="PackedScene" uid="uid://b7gwtd5g80xmc" path="res://Player/player.tscn" id="2_rcuel"]
+[ext_resource type="PackedScene" uid="uid://l8gtmn7ir48q" path="res://Enemies/sniper_frog.tscn" id="4_kngdy"]
+[ext_resource type="PackedScene" uid="uid://c0josf8my3plj" path="res://Enemies/RunningFrog.tscn" id="5_dt51x"]
+[ext_resource type="Texture2D" uid="uid://bx7xsmd6wew3" path="res://Assets usefull/Custom assets/Blocks/parallax_1.png" id="6_meblo"]
+[ext_resource type="Texture2D" uid="uid://bpa0of35q8pn6" path="res://Assets usefull/Custom assets/Blocks/parallax_2.png" id="7_rdptu"]
+[ext_resource type="Texture2D" uid="uid://dm4pjjxaypbff" path="res://Assets usefull/Custom assets/Blocks/parallax_3.png" id="8_yp1qb"]
+[ext_resource type="PackedScene" uid="uid://cggqggvdt4amg" path="res://check_point.tscn" id="9_abr6l"]
+[ext_resource type="PackedScene" uid="uid://c8tkfaci5n40n" path="res://lvl3.tscn" id="10_7sjol"]
+[ext_resource type="PackedScene" uid="uid://c3800nvbj70dh" path="res://lvl4.tscn" id="11_51v4o"]
+[ext_resource type="PackedScene" uid="uid://b7r3m5uw06bi4" path="res://lvl5.tscn" id="12_01cra"]
+[ext_resource type="PackedScene" uid="uid://b1ud07332ie4j" path="res://lvl1.tscn" id="13_74t7m"]
+[ext_resource type="PackedScene" uid="uid://b8pwqqgy3exuu" path="res://lvl2.tscn" id="14_i3p8q"]
+[ext_resource type="PackedScene" uid="uid://ckp8i3tt2sjel" path="res://Enemies/boss_2.tscn" id="15_1eefa"]
+
+[node name="World" type="Node2D"]
+position = Vector2(868, 288)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_7oqaf")
+playerScene = ExtResource("2_rcuel")
+
+[node name="TileMap" parent="." instance=ExtResource("2_hanmc")]
+position = Vector2(-571.333, 148)
+scale = Vector2(0.25, 0.25)
+
+[node name="SniperFrog" parent="." instance=ExtResource("4_kngdy")]
+position = Vector2(2565.33, -474)
+scale = Vector2(0.1, 0.1)
+
+[node name="RunningFrog" parent="." instance=ExtResource("5_dt51x")]
+position = Vector2(2767.33, -14.6667)
+scale = Vector2(0.1, 0.1)
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(-240, -18.6667)
+
+[node name="0" type="Node2D" parent="PlayerSpawn" groups=["PlayerSpawn"]]
+position = Vector2(-288.667, 96.6667)
+
+[node name="1" type="Node2D" parent="PlayerSpawn" groups=["PlayerSpawn"]]
+position = Vector2(-189.333, 79.3333)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -503.333
+offset_top = 184.667
+offset_right = -400.333
+offset_bottom = 271.667
+text = "Cavier Souris:
+X pour tirer
+C pour dash"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = -535.333
+offset_top = 862.0
+offset_right = -429.333
+offset_bottom = 949.0
+text = "Eloignez vous du rebord avant de tirer ! Vous pouvez remonter en utilisant le wall jump."
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/sky"]
+scale = Vector2(0.801, 0.801)
+texture = ExtResource("6_meblo")
+centered = false
+
+[node name="far mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(1152.64, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/far mountains"]
+scale = Vector2(0.801, 0.801)
+texture = ExtResource("7_rdptu")
+centered = false
+
+[node name="near mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1152.64, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/near mountains"]
+scale = Vector2(0.801, 0.801)
+texture = ExtResource("8_yp1qb")
+centered = false
+
+[node name="CheckPoint" parent="." instance=ExtResource("9_abr6l")]
+position = Vector2(-312.667, 96.6667)
+
+[node name="TileMap4" parent="." instance=ExtResource("10_7sjol")]
+visible = false
+
+[node name="TileMap6" parent="." instance=ExtResource("11_51v4o")]
+visible = false
+position = Vector2(-578.667, -192)
+scale = Vector2(0.534, 0.534)
+
+[node name="TileMap5" parent="." instance=ExtResource("12_01cra")]
+visible = false
+position = Vector2(-578.667, -192)
+scale = Vector2(0.534, 0.534)
+
+[node name="TileMap2" parent="." instance=ExtResource("13_74t7m")]
+visible = false
+
+[node name="TileMap3" parent="." instance=ExtResource("14_i3p8q")]
+visible = false
+
+[node name="bouse" parent="." instance=ExtResource("15_1eefa")]
+position = Vector2(1326.67, 103.333)
+
+[node name="boss_2" parent="." instance=ExtResource("15_1eefa")]
+position = Vector2(568.667, 147.333)

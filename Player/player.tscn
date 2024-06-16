@@ -1,0 +1,156 @@
+[gd_scene load_steps=16 format=3 uid="uid://b7gwtd5g80xmc"]
+
+[ext_resource type="Script" path="res://Player/player.cs" id="1_b85xb"]
+[ext_resource type="Texture2D" uid="uid://mljh2v8hu5r5" path="res://Assets usefull/Custom assets/Chats/cat_dash1.png" id="2_yuagr"]
+[ext_resource type="Texture2D" uid="uid://lw4om8ya1g8v" path="res://Assets usefull/Custom assets/Chats/cat_fall1.png" id="4_bosj7"]
+[ext_resource type="Texture2D" uid="uid://ddspuuliyomiv" path="res://Assets usefull/Custom assets/Chats/cat_hit1.png" id="4_clyx8"]
+[ext_resource type="Texture2D" uid="uid://bq8o0yc53l47j" path="res://Assets usefull/Custom assets/Chats/cat_idle_profile1.png" id="5_xfm2p"]
+[ext_resource type="Texture2D" uid="uid://cboa32sf4ha17" path="res://Assets usefull/Custom assets/Chats/cat_jump_profile1.png" id="6_dgajs"]
+[ext_resource type="Texture2D" uid="uid://daxgvxysnky1q" path="res://Assets usefull/Custom assets/Chats/walk_1.png" id="7_dbopk"]
+[ext_resource type="Texture2D" uid="uid://bxw5edo4lac82" path="res://Assets usefull/Custom assets/Chats/walk_2.png" id="8_mpw3v"]
+[ext_resource type="Shape2D" uid="uid://dyceucvyyajqd" path="res://Assets usefull/cShapes/cat_standing.tres" id="9_fdgi2"]
+[ext_resource type="Texture2D" uid="uid://k2s7dtqw6a8e" path="res://Assets usefull/Custom assets/Chats/wall_slide.png" id="9_kj2ws"]
+[ext_resource type="Texture2D" uid="uid://cjilbu28sple2" path="res://Assets usefull/Custom assets/Chats/cat_shoot2.png" id="10_phr6u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iktaj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yuagr")
+}],
+"loop": true,
+"name": &"Dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bosj7")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bosj7")
+}],
+"loop": false,
+"name": &"FastFall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_clyx8")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_xfm2p")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_dgajs")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dbopk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mpw3v")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_phr6u")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kj2ws")
+}],
+"loop": true,
+"name": &"WallSlide",
+"speed": 5.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_haqf4"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1rqg"]
+size = Vector2(42.6667, 18.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2ngk"]
+size = Vector2(19.3333, 22)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(1.5, 1.5)
+collision_layer = 3
+script = ExtResource("1_b85xb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(0.0583568, 0.0528018)
+sprite_frames = SubResource("SpriteFrames_iktaj")
+animation = &"Shoot"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.07208, 4.83333)
+shape = ExtResource("9_fdgi2")
+one_way_collision_margin = 0.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_haqf4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -13.0
+offset_top = -37.0
+offset_right = 25.0
+offset_bottom = -14.0
+
+[node name="GunRight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GunRight"]
+position = Vector2(31, 4.667)
+shape = SubResource("RectangleShape2D_b1rqg")
+
+[node name="GunLeft" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GunLeft"]
+position = Vector2(-31, 4.667)
+shape = SubResource("RectangleShape2D_b1rqg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.333333, 4.33333)
+shape = SubResource("RectangleShape2D_o2ngk")
+
+[connection signal="body_entered" from="GunRight" to="." method="_on_gun_body_entered"]
+[connection signal="body_entered" from="GunLeft" to="." method="_on_gun_body_entered"]

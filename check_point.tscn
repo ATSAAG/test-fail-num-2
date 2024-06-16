@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cggqggvdt4amg"]
+
+[ext_resource type="Texture2D" uid="uid://bsv5umr58k32q" path="res://Assets usefull/Custom assets/Blocks/respawn_point.png" id="1_is6hh"]
+[ext_resource type="Script" path="res://check_point.cs" id="1_w3t1d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yn3hq"]
+size = Vector2(82.5, 82.5)
+
+[node name="CheckPoint" type="Node2D"]
+script = ExtResource("1_w3t1d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-55, -77)
+scale = Vector2(0.268571, 0.316929)
+texture = ExtResource("1_is6hh")
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(42, 42)
+shape = SubResource("RectangleShape2D_yn3hq")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

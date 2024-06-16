@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://l8gtmn7ir48q"]
+
+[ext_resource type="Script" path="res://Enemies/SniperFrog.cs" id="1_hr0js"]
+[ext_resource type="Texture2D" uid="uid://donlv17n8nwf0" path="res://Assets usefull/Custom assets/Frogs/frog_sniper_aim.png" id="2_ugu2y"]
+[ext_resource type="Texture2D" uid="uid://c10m2xvpwoca5" path="res://Assets usefull/Custom assets/Frogs/frog_snipe_shot.png" id="3_j3h6i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6phe4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ugu2y")
+}],
+"loop": true,
+"name": &"Aim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_j3h6i")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otemt"]
+size = Vector2(578, 203)
+
+[node name="SniperFrog" type="CharacterBody2D"]
+script = ExtResource("1_hr0js")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(76, -86)
+sprite_frames = SubResource("SpriteFrames_6phe4")
+animation = &"Shoot"
+autoplay = "Aim"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(166, 3)
+shape = SubResource("RectangleShape2D_otemt")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-102, 42)
+target_position = Vector2(-2078, 0)
+collision_mask = 2
+hit_from_inside = true
