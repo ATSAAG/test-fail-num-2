@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bb8qmxgko6s2j"]
 
 [ext_resource type="Script" path="res://Enemies/bullet.cs" id="1_wn3bd"]
-[ext_resource type="Texture2D" uid="uid://dtdmjnjbcciaq" path="res://Assets usefull/Custom assets/Bosses/laserRed01.png" id="2_hdqi4"]
+[ext_resource type="Texture2D" uid="uid://bqqabmkssom4r" path="res://Assets usefull/Custom assets/Bosses/boss_orb.png" id="2_oxr4t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wdvny"]
 radius = 24.0
@@ -11,7 +11,7 @@ height = 106.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_hdqi4")
+"texture": ExtResource("2_oxr4t")
 }],
 "loop": true,
 "name": &"default",
@@ -19,13 +19,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xi804"]
-size = Vector2(78, 10)
+size = Vector2(93, 25)
 
 [node name="bullet" type="CharacterBody2D"]
 script = ExtResource("1_wn3bd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, -4)
+position = Vector2(10, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_wdvny")
 disabled = true
@@ -35,19 +35,15 @@ position = Vector2(-34, 1)
 target_position = Vector2(-31, 0)
 collision_mask = 2
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(6, -0.999999)
-scale = Vector2(3.8, 1.7)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-9.48276, 1)
-scale = Vector2(3.00383, 0.266667)
+position = Vector2(7, 1.99999)
+scale = Vector2(0.174641, 0.0978897)
 sprite_frames = SubResource("SpriteFrames_nveb6")
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(4, 0)
+position = Vector2(9, 2)
 shape = SubResource("RectangleShape2D_xi804")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitboxe_body_entered"]

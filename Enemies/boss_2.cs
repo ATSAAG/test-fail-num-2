@@ -5,7 +5,7 @@ public partial class boss_2 : GroundedEnemy
 {	
 	//[Export] public PackedScene bullet;
 	
-	public float DistanceOfDetction = 250.0f;
+	public float DistanceOfDetction = 450.0f;
 	public Vector2 PlayerPos;
 	public bool isMissileLaunched = false;
 	public new bool isAttacking = false;
@@ -27,11 +27,11 @@ public partial class boss_2 : GroundedEnemy
 		
 		
 		 // Initialize and start the missile timer
-		_missileTimer = GetNode<Timer>("Timer");
-		_missileTimer.WaitTime = 2.0f; // Set your desired interval
-		_missileTimer.Autostart = true;
-		_missileTimer.OneShot = false; // Ensure the timer repeats
-		_missileTimer.Start();
+		//_missileTimer = GetNode<Timer>("Timer");
+		//_missileTimer.WaitTime = 2.0f; // Set your desired interval
+		//_missileTimer.Autostart = true;
+		//_missileTimer.OneShot = false; // Ensure the timer repeats
+		//_missileTimer.Start();
 				
 	}
 	public override void _PhysicsProcess(double delta)
@@ -40,58 +40,45 @@ public partial class boss_2 : GroundedEnemy
 		
 		if (isAttacking) 
 		{
-			if (GlobalPosition.X > PlayerPos.X)
+			if (!isMissileLaunched)
 			{
+				_sprite.Play("shoot");
 				//GD.Print("Boss tire à gauche);		
 				
-				if (!isMissileLaunched)
+				var bulletScene = (PackedScene)ResourceLoader.Load("res://Enemies/bullet.tscn");
+				
+				if (bulletScene != null)
 				{
-
-					var bulletScene = (PackedScene)ResourceLoader.Load("res://Enemies/bullet.tscn");
+					GD.Print("Launching missiles");
+					bullet Bullet1 = (bullet)bulletScene.Instantiate();
+					bullet Bullet2 = (bullet)bulletScene.Instantiate();
+					bullet Bullet3 = (bullet)bulletScene.Instantiate();
 					
-					if (bulletScene != null)
-					{
-						GD.Print("chuis dans le milliii");
-						bullet Bullet = (bullet)bulletScene.Instantiate();
-						//bullet.GetNode("RayCast2D").SetCollisionMaskBit(0, false); // Désactiver la collision avec le boss
-						//bullet.Position = this.GlobalPosition;
-						
-						GetTree().Root.AddChild(Bullet);
-						isMissileLaunched = true;
-														
-						//GD.Print("nom bullet = " + Bullet.Name + ", player.Health = " + player.Health);
-						player.Health -= 8;
-						//GD.Print("player.Health = " + player.Health);
-						
-					}
-
-				}	
-			}
-			else
-			{
-				//GD.Print("Boss tire a droite");
+					Vector2 basePosition = this.GlobalPosition;
+					float spacing = 20.0f; // Space between missiles
 					
-				if (!isMissileLaunched)
-				{
-					var bulletScene = (PackedScene)ResourceLoader.Load("res://Enemies/bullet.tscn");
+					Bullet1.GlobalPosition = new Vector2(basePosition.X - spacing, basePosition.Y);
+					Bullet2.GlobalPosition = basePosition;
+					Bullet3.GlobalPosition = new Vector2(basePosition.X + spacing, basePosition.Y);
 					
-					if (bulletScene != null)
-					{
-						GD.Print("chuis dans le milliii");
-						bullet Bullet = (bullet)bulletScene.Instantiate();
-						//bullet.GetNode("RayCast2D").SetCollisionMaskBit(0, false); // Désactiver la collision avec le boss
-						//bullet.Position = this.GlobalPosition;
-						
-						GetTree().Root.AddChild(Bullet);
-						Bullet.Direction = 1;
-						isMissileLaunched = true;
-														
-						//GD.Print("nom bullet = " + Bullet.Name + ", player.Health = " + player.Health);
-						player.Health -= 8;
-						//GD.Print("player.Health = " + player.Health);
-					}
+					GetTree().Root.AddChild(Bullet1);
+					GetTree().Root.AddChild(Bullet2);
+					GetTree().Root.AddChild(Bullet3);
+					
+					int direction = GlobalPosition.X < PlayerPos.X ? 1 : -1;
+					Bullet1.Direction = direction;
+					Bullet2.Direction = direction;
+					Bullet3.Direction = direction;
+					
+					isMissileLaunched = true;
+					player.Health -= 5;
+				
+					//GD.Print("player.Health = " + player.Health);					
+				
 				}
+
 			}
+
 		}
 		
 		

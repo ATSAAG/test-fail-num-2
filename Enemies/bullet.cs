@@ -64,12 +64,7 @@ public partial class bullet : GroundedEnemy
 		return Velocity;
 	}
 	
-	private void _on_visible_on_screen_enabler_2d_screen_exited()
-	{
-		/*QueueFree();
-		boss_2 boss_testee = GetParent().GetNode("World").GetNode<boss_2>("boss_2");
-		boss_testee.isMissileLaunched=false;*/
-	}
+
 	
 	public override void CheckRaycasts()
 	{ 
